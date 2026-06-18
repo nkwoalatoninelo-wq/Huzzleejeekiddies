@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Huzzleejeekiddies</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Welcome to Huzzleejeekiddies 📚</h1>
+  <p>Enter your reading code below:</p>
+  
+  <input type="text" id="codeInput" placeholder="Type code here">
+  <button onclick="checkCode()">I'm already reading one</button>
+  
+  <div id="story"></div>
+
+<script>
+function checkCode() {
+  let code = document.getElementById('codeInput').value;
+  fetch('books.json')
+    .then(res => res.json())
+    .then(books => {
+      let book = books.find(b => b.code === code);
+      if(book) {
+        document.getElementById('story').innerHTML = `<h2>${book.title}</h2><p>${book.story}</p>`;
+      } else {
+        document.getElementById('story').innerHTML = "Invalid code sire 😅";
+      }
+    });
+}
+</script>
+</body>
+</html>
